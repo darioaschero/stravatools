@@ -2,10 +2,11 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { StravaActivity } from '@/types/strava';
 
 export default function StravaActivities() {
   const { data: session } = useSession();
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState<StravaActivity[]>([]);
 
   useEffect(() => {
     async function fetchActivities() {
@@ -26,7 +27,13 @@ export default function StravaActivities() {
   return (
     <div>
       <h2>My Strava Activities</h2>
-      {/* Render activities */}
+      <ul>
+        {activities.map((activity: StravaActivity) => (
+          <li key={activity.id}>
+            {activity.name} - {activity.type} ({activity.distance}m)
+          </li>
+        ))}
+      </ul>
     </div>
   );
 } 

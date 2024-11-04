@@ -1,4 +1,5 @@
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, Session } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 import StravaProvider from 'next-auth/providers/strava';
 
 export const authConfig: NextAuthOptions = {
@@ -62,7 +63,7 @@ export const authConfig: NextAuthOptions = {
         return { ...token, error: 'RefreshAccessTokenError' };
       }
     },
-    async session({ session, token }: { session: any, token: any & { accessToken?: string, error?: string } }) {
+    async session({ session, token }: { session: Session; token: JWT }) {
       session.accessToken = token.accessToken;
       session.error = token.error;
       return session;
