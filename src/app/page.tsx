@@ -1,7 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { authConfig } from './auth.config';
 import { LoginButton } from '@/components/login-button';
-import { LogoutButton } from '@/components/logout-button';
 import { ActivitiesList } from '@/components/activities-list';
 
 export default async function Home() {
